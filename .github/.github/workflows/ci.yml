@@ -1,0 +1,26 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main  # Se ejecuta cuando hay un push en la rama main
+  pull_request:
+    branches:
+      - main  # También se ejecuta cuando haces un pull request hacia la rama main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Este es el sistema operativo donde se ejecutará el workflow
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2  # Esta acción descarga el código del repositorio
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2  # Esta acción instala Node.js (por si tu proyecto lo necesita)
+
+    - name: Install dependencies
+      run: npm install  # Instala las dependencias si tu proyecto usa Node.js
+
+    - name: Run tests
+      run: npm test  # Si tienes tests, se ejecutan aquí (si no tienes, puedes omitirlo)
